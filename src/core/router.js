@@ -8,6 +8,10 @@ const facilityController =
 const associationController =
     require("../controllers/associationController");
 
+const activityController =
+    require("../controllers/activityController");
+
+
 const router = findMyWay({
     defaultRoute: (req, res) => {
         render(
@@ -22,27 +26,56 @@ const router = findMyWay({
     }
 });
 
-const urlencodedParser = bodyParser.urlencoded({
-    extended: false
-});
+
+const urlencodedParser =
+    bodyParser.urlencoded({
+        extended: false
+    });
 
 
 /* HOME */
 
-router.on("GET", "/", (req, res) => {
-    render(res, "home");
-});
+router.on(
+    "GET",
+    "/",
+    (req, res) => {
+        render(res, "home");
+    }
+);
 
 
 /* ACTIVITIES */
 
-router.on("GET", "/activities", (req, res) => {
-    res.writeHead(200, {
-        "Content-Type": "text/plain; charset=utf-8"
-    });
+router.on(
+    "GET",
+    "/activities",
+    activityController.index
+);
 
-    res.end("Activities page");
-});
+router.on(
+    "GET",
+    "/activities/create",
+    activityController.createForm
+);
+
+router.on(
+    "POST",
+    "/activities",
+    (req, res) => {
+
+        urlencodedParser(
+            req,
+            res,
+            () => {
+                activityController.store(
+                    req,
+                    res
+                );
+            }
+        );
+
+    }
+);
 
 
 /* FACILITIES */
@@ -75,9 +108,18 @@ router.on(
     "POST",
     "/facilities",
     (req, res) => {
-        urlencodedParser(req, res, () => {
-            facilityController.store(req, res);
-        });
+
+        urlencodedParser(
+            req,
+            res,
+            () => {
+                facilityController.store(
+                    req,
+                    res
+                );
+            }
+        );
+
     }
 );
 
@@ -85,13 +127,19 @@ router.on(
     "POST",
     "/facilities/:id/update",
     (req, res, params) => {
-        urlencodedParser(req, res, () => {
-            facilityController.update(
-                req,
-                res,
-                params
-            );
-        });
+
+        urlencodedParser(
+            req,
+            res,
+            () => {
+                facilityController.update(
+                    req,
+                    res,
+                    params
+                );
+            }
+        );
+
     }
 );
 
@@ -99,13 +147,19 @@ router.on(
     "POST",
     "/facilities/:id/delete",
     (req, res, params) => {
-        urlencodedParser(req, res, () => {
-            facilityController.remove(
-                req,
-                res,
-                params
-            );
-        });
+
+        urlencodedParser(
+            req,
+            res,
+            () => {
+                facilityController.remove(
+                    req,
+                    res,
+                    params
+                );
+            }
+        );
+
     }
 );
 
@@ -140,12 +194,18 @@ router.on(
     "POST",
     "/associations",
     (req, res) => {
-        urlencodedParser(req, res, () => {
-            associationController.store(
-                req,
-                res
-            );
-        });
+
+        urlencodedParser(
+            req,
+            res,
+            () => {
+                associationController.store(
+                    req,
+                    res
+                );
+            }
+        );
+
     }
 );
 
@@ -153,13 +213,19 @@ router.on(
     "POST",
     "/associations/:id/update",
     (req, res, params) => {
-        urlencodedParser(req, res, () => {
-            associationController.update(
-                req,
-                res,
-                params
-            );
-        });
+
+        urlencodedParser(
+            req,
+            res,
+            () => {
+                associationController.update(
+                    req,
+                    res,
+                    params
+                );
+            }
+        );
+
     }
 );
 
@@ -167,13 +233,19 @@ router.on(
     "POST",
     "/associations/:id/delete",
     (req, res, params) => {
-        urlencodedParser(req, res, () => {
-            associationController.remove(
-                req,
-                res,
-                params
-            );
-        });
+
+        urlencodedParser(
+            req,
+            res,
+            () => {
+                associationController.remove(
+                    req,
+                    res,
+                    params
+                );
+            }
+        );
+
     }
 );
 

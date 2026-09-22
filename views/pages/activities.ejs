@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Activities - SportConnect Pro</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+</head>
+
+<body>
+
+    <h1>Activities</h1>
+
+    <a href="/activities/create">
+        Create Activity
+    </a>
+
+    <% if (activities.length === 0) { %>
+
+        <p>No activities found.</p>
+
+    <% } else { %>
+
+        <table border="1">
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Association</th>
+                    <th>Facility</th>
+                    <th>Season</th>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Sub-zone</th>
+                    <th>Capacity</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <% activities.forEach(activity => { %>
+
+                    <tr>
+
+                        <td>
+                            <%= activity.id %>
+                        </td>
+
+                        <td>
+                            <%= activity.name %>
+                        </td>
+
+                        <td>
+                            <%= activity.association_name %>
+                        </td>
+
+                        <td>
+                            <%= activity.facility_name %>
+                        </td>
+
+                        <td>
+                            <%= activity.season %>
+                        </td>
+
+                        <td>
+                            <%= activity.day_of_week %>
+                        </td>
+
+                        <td>
+                            <%= activity.start_time %>
+                            -
+                            <%= activity.end_time %>
+                        </td>
+
+                        <td>
+                            <%= activity.sub_zone || "Full facility" %>
+                        </td>
+
+                        <td>
+                            <%= activity.max_capacity %>
+                        </td>
+
+                        <td>
+                            <%= activity.base_price %>
+                        </td>
+
+                        <td>
+                            <%= activity.status %>
+                        </td>
+
+                    </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    <% } %>
+
+</body>
+
+</html>
