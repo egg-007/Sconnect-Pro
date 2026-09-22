@@ -14,6 +14,10 @@
 
     <h1>Facilities</h1>
 
+    <a href="/facilities/create">
+        Create Facility
+    </a>
+
     <% if (facilities.length === 0) { %>
 
         <p>No facilities found.</p>
@@ -23,6 +27,7 @@
         <table border="1">
 
             <thead>
+
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
@@ -30,7 +35,9 @@
                     <th>Address</th>
                     <th>ERP Capacity</th>
                     <th>Divisible</th>
+                    <th>Actions</th>
                 </tr>
+
             </thead>
 
             <tbody>
@@ -38,12 +45,47 @@
                 <% facilities.forEach(facility => { %>
 
                     <tr>
+
                         <td><%= facility.id %></td>
-                        <td><%= facility.name %></td>
-                        <td><%= facility.type %></td>
-                        <td><%= facility.address || "-" %></td>
-                        <td><%= facility.erp_capacity %></td>
-                        <td><%= facility.is_divisible ? "Yes" : "No" %></td>
+
+                        <td>
+                            <%= facility.name %>
+                        </td>
+
+                        <td>
+                            <%= facility.type %>
+                        </td>
+
+                        <td>
+                            <%= facility.address || "-" %>
+                        </td>
+
+                        <td>
+                            <%= facility.erp_capacity %>
+                        </td>
+
+                        <td>
+                            <%= facility.is_divisible ? "Yes" : "No" %>
+                        </td>
+
+                        <td>
+
+                            <a href="/facilities/<%= facility.id %>/edit">
+                                Edit
+                            </a>
+
+                            <form
+                                action="/facilities/<%= facility.id %>/delete"
+                                method="POST"
+                                style="display:inline"
+                            >
+                                <button type="submit">
+                                    Delete
+                                </button>
+                            </form>
+
+                        </td>
+
                     </tr>
 
                 <% }) %>

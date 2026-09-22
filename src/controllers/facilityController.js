@@ -90,9 +90,100 @@ async function store(req, res) {
     }
 }
 
+async function editForm(req, res, params) {
+    try {
+        const facility = await facilityService.getFacilityById(params.id);
+
+        if (!facility) {
+            return render(
+                res,
+                "error",
+                {
+                    statusCode: 404,
+                    message: "Facility not found"
+                },
+                404
+            );
+        }
+
+        render(res, "facility-edit", {
+            facility
+        });
+
+    } catch (error) {
+        console.error(error);
+
+        render(
+            res,
+            "error",
+            {
+                statusCode: 500,
+                message: "Unable to load facility"
+            },
+            500
+        );
+    }
+}
+
+async function update(req, res, params) {
+    try {
+        await facilityService.updateFacility(
+            params.id,
+            req.body
+        );
+
+        res.writeHead(302, {
+            Location: "/facilities"
+        });
+
+        res.end();
+
+    } catch (error) {
+        console.error(error);
+
+        render(
+            res,
+            "error",
+            {
+                statusCode: 400,
+                message: error.message
+            },
+            400
+        );
+    }
+}
+
+async function remove(req, res, params) {
+    try {
+        await facilityService.deleteFacility(params.id);
+
+        res.writeHead(302, {
+            Location: "/facilities"
+        });
+
+        res.end();
+
+    } catch (error) {
+        console.error(error);
+
+        render(
+            res,
+            "error",
+            {
+                statusCode: 400,
+                message: error.message
+            },
+            400
+        );
+    }
+}
+
 module.exports = {
     index,
     show,
     createForm,
-    store
+    store,
+    editForm,
+    update,
+    remove
 };

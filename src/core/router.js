@@ -34,6 +34,9 @@ router.on("GET", "/activities", (req, res) => {
     res.end("Activities page");
 });
 
+
+/* FACILITIES */
+
 router.on(
     "GET",
     "/facilities",
@@ -44,6 +47,12 @@ router.on(
     "GET",
     "/facilities/create",
     facilityController.createForm
+);
+
+router.on(
+    "GET",
+    "/facilities/:id/edit",
+    facilityController.editForm
 );
 
 router.on(
@@ -62,16 +71,25 @@ router.on(
     }
 );
 
-router.on("POST", "/test-form", (req, res) => {
-    urlencodedParser(req, res, () => {
-        console.log(req.body);
-
-        res.writeHead(200, {
-            "Content-Type": "text/plain; charset=utf-8"
+router.on(
+    "POST",
+    "/facilities/:id/update",
+    (req, res, params) => {
+        urlencodedParser(req, res, () => {
+            facilityController.update(req, res, params);
         });
+    }
+);
 
-        res.end("Form received");
-    });
-});
+router.on(
+    "POST",
+    "/facilities/:id/delete",
+    (req, res, params) => {
+        urlencodedParser(req, res, () => {
+            facilityController.remove(req, res, params);
+        });
+    }
+);
+
 
 module.exports = router;
