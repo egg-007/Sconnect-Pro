@@ -182,3 +182,6 @@ ON registrations(activity_id);
 
 CREATE INDEX idx_waiting_list_activity_priority
 ON waiting_list(activity_id, priority_score DESC, created_at ASC);
+
+ALTER TABLE facilities
+RENAME COLUMN created_ar TO created_at;
