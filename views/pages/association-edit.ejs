@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Association</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+</head>
+
+<body>
+
+    <h1>Edit Association</h1>
+
+    <form
+        action="/associations/<%= association.id %>/update"
+        method="POST"
+    >
+
+        <div>
+
+            <label>Name</label>
+
+            <input
+                type="text"
+                name="name"
+                value="<%= association.name %>"
+                required
+            >
+
+        </div>
+
+        <div>
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                name="email"
+                value="<%= association.email || '' %>"
+            >
+
+        </div>
+
+        <div>
+
+            <label>Phone</label>
+
+            <input
+                type="text"
+                name="phone"
+                value="<%= association.phone || '' %>"
+            >
+
+        </div>
+
+        <button type="submit">
+            Update Association
+        </button>
+
+    </form>
+
+    <a href="/associations">
+        Back
+    </a>
+
+</body>
+
+</html>

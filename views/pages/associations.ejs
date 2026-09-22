@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Associations - SportConnect Pro</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+</head>
+
+<body>
+
+    <h1>Associations</h1>
+
+    <a href="/associations/create">
+        Create Association
+    </a>
+
+    <% if (associations.length === 0) { %>
+
+        <p>No associations found.</p>
+
+    <% } else { %>
+
+        <table border="1">
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                <% associations.forEach(association => { %>
+
+                    <tr>
+
+                        <td>
+                            <%= association.id %>
+                        </td>
+
+                        <td>
+                            <%= association.name %>
+                        </td>
+
+                        <td>
+                            <%= association.email || "-" %>
+                        </td>
+
+                        <td>
+                            <%= association.phone || "-" %>
+                        </td>
+
+                        <td>
+
+                            <a
+                                href="/associations/<%= association.id %>/edit"
+                            >
+                                Edit
+                            </a>
+
+                            <form
+                                action="/associations/<%= association.id %>/delete"
+                                method="POST"
+                                style="display:inline"
+                            >
+
+                                <button type="submit">
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    <% } %>
+
+</body>
+
+</html>
