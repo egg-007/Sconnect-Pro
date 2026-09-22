@@ -42,7 +42,9 @@ async function findConflicts({
 
           AND (
                 sub_zone IS NULL
+                OR sub_zone = ''
                 OR $5::varchar IS NULL
+                OR $5::varchar = ''
                 OR sub_zone = $5
           )
         `,
