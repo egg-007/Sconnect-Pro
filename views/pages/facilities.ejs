@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Facilities - SportConnect Pro</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <h1>Facilities</h1>
+
+    <% if (facilities.length === 0) { %>
+
+        <p>No facilities found.</p>
+
+    <% } else { %>
+
+        <table border="1">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Address</th>
+                    <th>ERP Capacity</th>
+                    <th>Divisible</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% facilities.forEach(facility => { %>
+
+                    <tr>
+                        <td><%= facility.id %></td>
+                        <td><%= facility.name %></td>
+                        <td><%= facility.type %></td>
+                        <td><%= facility.address || "-" %></td>
+                        <td><%= facility.erp_capacity %></td>
+                        <td><%= facility.is_divisible ? "Yes" : "No" %></td>
+                    </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    <% } %>
+
+</body>
+
+</html>
