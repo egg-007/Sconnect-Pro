@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Registration</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+</head>
+
+<body>
+
+    <h1>Create Registration</h1>
+
+    <form
+        action="/registrations"
+        method="POST"
+    >
+
+        <div>
+            <label>Member</label>
+
+            <select
+                name="member_id"
+                required
+            >
+
+                <% members.forEach(member => { %>
+
+                    <option value="<%= member.id %>">
+                        <%= member.first_name %>
+                        <%= member.last_name %>
+                    </option>
+
+                <% }) %>
+
+            </select>
+        </div>
+
+        <div>
+            <label>Activity</label>
+
+            <select
+                name="activity_id"
+                required
+            >
+
+                <% activities.forEach(activity => { %>
+
+                    <option value="<%= activity.id %>">
+                        <%= activity.name %>
+                        -
+                        <%= activity.age_category || "All" %>
+                    </option>
+
+                <% }) %>
+
+            </select>
+        </div>
+
+        <div>
+            <label>Temporary Final Price</label>
+
+            <input
+                type="number"
+                name="final_price"
+                min="15"
+                step="0.01"
+                value="100"
+                required
+            >
+        </div>
+
+        <div>
+            <label>Payment Plan</label>
+
+            <select name="payment_plan">
+
+                <option value="1">
+                    One payment
+                </option>
+
+                <option value="3">
+                    Three payments
+                </option>
+
+            </select>
+        </div>
+
+        <button type="submit">
+            Register
+        </button>
+
+    </form>
+
+</body>
+
+</html>

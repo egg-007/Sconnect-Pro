@@ -14,6 +14,9 @@ const activityController =
 const memberController =
     require("../controllers/memberController");
 
+const registrationController =
+    require("../controllers/registrationController");
+
 
 const router = findMyWay({
     defaultRoute: (req, res) => {
@@ -276,6 +279,32 @@ router.on(
             res,
             () => {
                 memberController.store(
+                    req,
+                    res
+                );
+            }
+        );
+
+    }
+);
+/* REGISTRATIONS */
+
+router.on(
+    "GET",
+    "/registrations/create",
+    registrationController.createForm
+);
+
+router.on(
+    "POST",
+    "/registrations",
+    (req, res) => {
+
+        urlencodedParser(
+            req,
+            res,
+            () => {
+                registrationController.store(
                     req,
                     res
                 );

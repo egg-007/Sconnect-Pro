@@ -106,8 +106,21 @@ async function create(activity) {
     return result.rows[0];
 }
 
+async function findById(id) {
+    const result = await pool.query(
+        `
+        SELECT *
+        FROM activities
+        WHERE id = $1
+        `,
+        [id]
+    );
+
+    return result.rows[0];
+}
 module.exports = {
     findAll,
+    findById,
     findConflicts,
     create
 };
