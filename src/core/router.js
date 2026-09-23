@@ -10,6 +10,9 @@ const associationController =
 
 const activityController =
     require("../controllers/activityController");
+    
+const memberController =
+    require("../controllers/memberController");
 
 
 const router = findMyWay({
@@ -249,5 +252,37 @@ router.on(
     }
 );
 
+/* MEMBERS */
+
+router.on(
+    "GET",
+    "/members",
+    memberController.index
+);
+
+router.on(
+    "GET",
+    "/members/create",
+    memberController.createForm
+);
+
+router.on(
+    "POST",
+    "/members",
+    (req, res) => {
+
+        urlencodedParser(
+            req,
+            res,
+            () => {
+                memberController.store(
+                    req,
+                    res
+                );
+            }
+        );
+
+    }
+);
 
 module.exports = router;

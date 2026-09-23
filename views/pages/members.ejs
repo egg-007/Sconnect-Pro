@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Members - SportConnect Pro</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+</head>
+
+<body>
+
+    <h1>Members</h1>
+
+    <a href="/members/create">
+        Create Member
+    </a>
+
+    <% if (members.length === 0) { %>
+
+        <p>No members found.</p>
+
+    <% } else { %>
+
+        <table border="1">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Family</th>
+                    <th>Birth Date</th>
+                    <th>Email</th>
+                    <th>Medical Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% members.forEach(member => { %>
+
+                    <tr>
+                        <td><%= member.id %></td>
+
+                        <td>
+                            <%= member.first_name %>
+                            <%= member.last_name %>
+                        </td>
+
+                        <td>
+                            <%= member.family_name %>
+                        </td>
+
+                        <td>
+                            <%= member.birth_date %>
+                        </td>
+
+                        <td>
+                            <%= member.email || "-" %>
+                        </td>
+
+                        <td>
+                            <%= member.medical_status %>
+                        </td>
+                    </tr>
+
+                <% }) %>
+
+            </tbody>
+
+        </table>
+
+    <% } %>
+
+</body>
+
+</html>
