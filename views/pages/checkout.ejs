@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Registration Result</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/style.css"
+    >
+</head>
+
+<body>
+
+    <h1>Registration Confirmed</h1>
+
+    <h2>Pricing Details</h2>
+
+    <p>
+        Base Price:
+        €<%= pricing.base_price %>
+    </p>
+
+    <p>
+        Resident:
+        <%= pricing.is_resident ? "Yes" : "No" %>
+    </p>
+
+    <p>
+        Previous Family Registrations:
+        <%= pricing.family_registration_count %>
+    </p>
+
+    <p>
+        Family Quotient:
+        <%= pricing.family_quotient %>
+    </p>
+
+    <p>
+        Pass'Sport:
+        <%= pricing.has_pass_sport ? "Yes" : "No" %>
+    </p>
+
+    <hr>
+
+    <h2>
+        Final Price:
+        €<%= pricing.final_price %>
+    </h2>
+
+    <% if (pricing.installments) { %>
+
+        <h3>3 Payment Plan</h3>
+
+        <p>
+            Payment 1:
+            €<%= pricing.installments.first %>
+        </p>
+
+        <p>
+            Payment 2:
+            €<%= pricing.installments.second %>
+        </p>
+
+        <p>
+            Payment 3:
+            €<%= pricing.installments.third %>
+        </p>
+
+    <% } %>
+
+    <p>
+        Registration Status:
+        <strong>
+            <%= registration.status %>
+        </strong>
+    </p>
+
+    <a href="/registrations/create">
+        New Registration
+    </a>
+
+</body>
+
+</html>

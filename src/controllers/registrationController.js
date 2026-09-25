@@ -7,7 +7,8 @@ const memberService =
 const activityService =
     require("../services/activityService");
 
-const render = require("../core/renderer");
+const render =
+    require("../core/renderer");
 
 async function createForm(req, res) {
     try {
@@ -17,10 +18,14 @@ async function createForm(req, res) {
         const activities =
             await activityService.getAllActivities();
 
-        render(res, "registration-form", {
-            members,
-            activities
-        });
+        render(
+            res,
+            "registration-form",
+            {
+                members,
+                activities
+            }
+        );
 
     } catch (error) {
         console.error(error);
@@ -30,7 +35,8 @@ async function createForm(req, res) {
             "error",
             {
                 statusCode: 500,
-                message: "Unable to load registration form"
+                message:
+                    "Unable to load registration form"
             },
             500
         );
@@ -39,15 +45,15 @@ async function createForm(req, res) {
 
 async function store(req, res) {
     try {
-        await registrationService.createRegistration(
-            req.body
+        const result =
+            await registrationService
+                .createRegistration(req.body);
+
+        render(
+            res,
+            "checkout",
+            result
         );
-
-        res.writeHead(302, {
-            Location: "/"
-        });
-
-        res.end();
 
     } catch (error) {
         console.error(error);
@@ -57,7 +63,8 @@ async function store(req, res) {
             "error",
             {
                 statusCode: 400,
-                message: error.message
+                message:
+                    error.message
             },
             400
         );
