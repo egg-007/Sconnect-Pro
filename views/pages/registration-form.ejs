@@ -1,36 +1,168 @@
-<%- include('../partials/header', { title: 'New Registration' }) %>
-    <div class="mx-auto max-w-4xl">
-        <div class="mb-8">
-            <p class="text-sm font-bold uppercase tracking-widest text-orange">Registration</p>
-            <h1 class="text-4xl font-black text-plum">New Registration</h1>
-            <p class="mt-2 text-plum/60">Choose a member, activity and payment plan.</p>
+<%- include("../partials/header", { title: "New Registration" }) %>
+
+<div class="mx-auto max-w-4xl">
+
+    <div class="mb-8">
+        <p class="text-sm font-bold uppercase tracking-widest text-orange">
+            Registration
+        </p>
+
+        <h1 class="text-4xl font-black text-plum">
+            New Registration
+        </h1>
+
+        <p class="mt-2 text-plum/60">
+            Choose a member, an activity and a payment plan.
+            The final price is calculated automatically.
+        </p>
+    </div>
+
+
+    <form
+        action="/registrations"
+        method="POST"
+        class="grid gap-6 rounded-2xl bg-white p-7 shadow-soft md:grid-cols-2"
+    >
+
+        <div>
+            <label
+                for="member_id"
+                class="mb-2 block text-sm font-bold text-plum"
+            >
+                Member
+            </label>
+
+            <select
+                id="member_id"
+                name="member_id"
+                required
+                class="w-full rounded-xl border border-plum/10 bg-white px-4 py-3 text-plum outline-none transition focus:border-orange"
+            >
+                <option value="">
+                    Select a member
+                </option>
+
+                <% members.forEach(member => { %>
+
+                    <option value="<%= member.id %>">
+                        <%= member.first_name %>
+                        <%= member.last_name %>
+                    </option>
+
+                <% }) %>
+            </select>
         </div>
-        <form action="/registrations" method="POST"
-            class="grid gap-5 rounded-2xl bg-white p-7 shadow-soft md:grid-cols-2">
-            <div><label class="mb-2 block text-sm font-bold text-plum">Member</label><select name="member_id" required
-                    class="w-full rounded-xl border border-plum/10 px-4 py-3">
-                    <% members.forEach(member=> { %><option value="<%= member.id %>">
-                            <%= member.first_name %>
-                                <%= member.last_name %>
-                        </option>
-                        <% }) %>
-                </select></div>
-            <div><label class="mb-2 block text-sm font-bold text-plum">Activity</label><select name="activity_id"
-                    required class="w-full rounded-xl border border-plum/10 px-4 py-3">
-                    <% activities.forEach(activity=> { %><option value="<%= activity.id %>">
-                            <%= activity.name %> · €<%= activity.base_price %>
-                        </option>
-                        <% }) %>
-                </select></div>
-            <div class="md:col-span-2"><label class="mb-2 block text-sm font-bold text-plum">Payment Plan</label><select
-                    name="payment_plan" class="w-full rounded-xl border border-plum/10 px-4 py-3">
-                    <option value="1">One payment</option>
-                    <option value="3">Three payments (40% / 30% / 30%)</option>
-                </select></div>
-            <div class="md:col-span-2 rounded-xl bg-sand/25 p-4 text-sm text-plum/70">Final price is calculated
-                automatically from residency, family discount, family quotient and Pass'Sport.</div>
-            <div class="md:col-span-2"><button
-                    class="w-full rounded-xl bg-orange px-5 py-3 font-bold text-white">Calculate & Register</button>
+
+
+        <div>
+            <label
+                for="activity_id"
+                class="mb-2 block text-sm font-bold text-plum"
+            >
+                Activity
+            </label>
+
+            <select
+                id="activity_id"
+                name="activity_id"
+                required
+                class="w-full rounded-xl border border-plum/10 bg-white px-4 py-3 text-plum outline-none transition focus:border-orange"
+            >
+                <option value="">
+                    Select an activity
+                </option>
+
+                <% activities.forEach(activity => { %>
+
+                    <option value="<%= activity.id %>">
+
+                        <%= activity.name %>
+
+                        -
+                        €<%= Number(activity.base_price).toFixed(2) %>
+
+                        <% if (activity.age_category) { %>
+                            -
+                            <%= activity.age_category %>
+                        <% } %>
+
+                    </option>
+
+                <% }) %>
+            </select>
+        </div>
+
+
+        <div class="md:col-span-2">
+
+            <label
+                for="payment_plan"
+                class="mb-2 block text-sm font-bold text-plum"
+            >
+                Payment Plan
+            </label>
+
+            <select
+                id="payment_plan"
+                name="payment_plan"
+                required
+                class="w-full rounded-xl border border-plum/10 bg-white px-4 py-3 text-plum outline-none transition focus:border-orange"
+            >
+
+                <option value="1">
+                    One payment
+                </option>
+
+                <option value="3">
+                    Three payments - 40% / 30% / 30%
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="md:col-span-2">
+
+            <div
+                class="rounded-2xl border border-orange/10 bg-sand/25 p-5"
+            >
+
+                <h2 class="font-black text-plum">
+                    Automatic pricing
+                </h2>
+
+                <p class="mt-2 text-sm leading-6 text-plum/60">
+                    The backend calculates the final price automatically
+                    using residency, family registrations, family quotient
+                    and Pass'Sport.
+                </p>
+
             </div>
-        </form>
-    </div><%- include('../partials/footer') %>
+
+        </div>
+
+
+        <div class="md:col-span-2 flex flex-col gap-3 sm:flex-row">
+
+            <button
+                type="submit"
+                class="rounded-xl bg-orange px-6 py-3 font-bold text-white shadow-soft transition hover:-translate-y-0.5"
+            >
+                Calculate & Register
+            </button>
+
+            <a
+                href="/"
+                class="rounded-xl border border-plum/10 bg-white px-6 py-3 text-center font-bold text-plum transition hover:bg-sand/20"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+<%- include("../partials/footer") %>

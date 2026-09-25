@@ -1,44 +1,325 @@
-<%- include('../partials/header', { title: 'Checkout' }) %>
-    <div class="mx-auto max-w-4xl">
-        <div class="grid gap-6 lg:grid-cols-[1.2fr_.8fr]">
-            <section class="rounded-2xl bg-white p-7 shadow-soft">
-                <p class="text-sm font-bold uppercase tracking-widest text-orange">Pricing</p>
-                <h1 class="mt-2 text-4xl font-black text-plum">Registration Summary</h1>
-                <div class="mt-7 space-y-4 text-sm">
-                    <div class="flex justify-between border-b border-plum/5 pb-3"><span>Base price</span><strong>€<%=
-                                pricing.base_price %></strong></div>
-                    <div class="flex justify-between border-b border-plum/5 pb-3"><span>Resident</span><strong>
-                            <%= pricing.is_resident ? 'Yes' : 'No' %>
-                        </strong></div>
-                    <div class="flex justify-between border-b border-plum/5 pb-3"><span>Previous family
-                            registrations</span><strong>
-                            <%= pricing.family_registration_count %>
-                        </strong></div>
-                    <div class="flex justify-between border-b border-plum/5 pb-3"><span>Family quotient</span><strong>
-                            <%= pricing.family_quotient %>
-                        </strong></div>
-                    <div class="flex justify-between"><span>Pass'Sport</span><strong>
-                            <%= pricing.has_pass_sport ? 'Applied' : 'No' %>
-                        </strong></div>
+<%- include("../partials/header", { title: "Registration Checkout" }) %>
+
+<div class="mx-auto max-w-5xl">
+
+    <div class="mb-8">
+
+        <p class="text-sm font-bold uppercase tracking-widest text-orange">
+            Registration
+        </p>
+
+        <h1 class="text-4xl font-black text-plum">
+            Registration Summary
+        </h1>
+
+        <p class="mt-2 text-plum/60">
+            Your registration has been processed
+            and the final price was calculated automatically.
+        </p>
+
+    </div>
+
+
+    <div class="grid gap-6 lg:grid-cols-[1.2fr_.8fr]">
+
+
+        <section
+            class="rounded-2xl bg-white p-7 shadow-soft"
+        >
+
+            <h2 class="text-2xl font-black text-plum">
+                Pricing Details
+            </h2>
+
+
+            <div class="mt-7 space-y-4">
+
+
+                <div
+                    class="flex items-center justify-between border-b border-plum/5 pb-4"
+                >
+
+                    <span class="text-plum/60">
+                        Base Price
+                    </span>
+
+                    <strong class="text-plum">
+                        €<%= Number(pricing.base_price).toFixed(2) %>
+                    </strong>
+
                 </div>
-            </section>
-            <aside class="rounded-2xl bg-plum p-7 text-white shadow-soft">
-                <p class="text-sm font-bold uppercase tracking-widest text-sand">Final price</p>
-                <p class="mt-3 text-5xl font-black">€<%= pricing.final_price %>
-                </p>
-                <p class="mt-3 text-white/60">Status: <%= registration.status %>
-                </p>
-                <% if (pricing.installments) { %>
-                    <div class="mt-7 space-y-3 rounded-xl bg-white/10 p-4 text-sm">
-                        <div class="flex justify-between"><span>Payment 1</span><strong>€<%= pricing.installments.first
-                                    %></strong></div>
-                        <div class="flex justify-between"><span>Payment 2</span><strong>€<%= pricing.installments.second
-                                    %></strong></div>
-                        <div class="flex justify-between"><span>Payment 3</span><strong>€<%= pricing.installments.third
-                                    %></strong></div>
+
+
+                <div
+                    class="flex items-center justify-between border-b border-plum/5 pb-4"
+                >
+
+                    <span class="text-plum/60">
+                        Resident
+                    </span>
+
+                    <strong class="text-plum">
+                        <%= pricing.is_resident ? "Yes" : "No" %>
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="flex items-center justify-between border-b border-plum/5 pb-4"
+                >
+
+                    <span class="text-plum/60">
+                        Previous Family Registrations
+                    </span>
+
+                    <strong class="text-plum">
+                        <%= pricing.family_registration_count %>
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="flex items-center justify-between border-b border-plum/5 pb-4"
+                >
+
+                    <span class="text-plum/60">
+                        Family Quotient
+                    </span>
+
+                    <strong class="text-plum">
+                        <%= pricing.family_quotient %>
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="flex items-center justify-between border-b border-plum/5 pb-4"
+                >
+
+                    <span class="text-plum/60">
+                        Pass'Sport
+                    </span>
+
+                    <strong
+                        class="<%= pricing.has_pass_sport ? 'text-green-600' : 'text-plum' %>"
+                    >
+
+                        <%= pricing.has_pass_sport
+                            ? "Applied"
+                            : "Not Applied"
+                        %>
+
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="flex items-center justify-between"
+                >
+
+                    <span class="text-plum/60">
+                        Registration Status
+                    </span>
+
+                    <span
+                        class="
+                            rounded-full px-3 py-1 text-xs font-bold
+
+                            <%= registration.status === 'confirmed'
+                                ? 'bg-green-100 text-green-700'
+                                : 'bg-orange/10 text-orange'
+                            %>
+                        "
+                    >
+
+                        <%= registration.status %>
+
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <aside
+            class="rounded-2xl bg-plum p-7 text-white shadow-soft"
+        >
+
+            <p
+                class="text-sm font-bold uppercase tracking-widest text-sand"
+            >
+                Final Price
+            </p>
+
+
+            <p class="mt-4 text-5xl font-black">
+                €<%= Number(pricing.final_price).toFixed(2) %>
+            </p>
+
+
+            <p class="mt-3 text-sm text-white/60">
+                Calculated from the selected activity,
+                family information and pricing rules.
+            </p>
+
+
+            <% if (pricing.installments) { %>
+
+                <div
+                    class="mt-8 rounded-2xl bg-white/10 p-5"
+                >
+
+                    <h3 class="font-black">
+                        3 Payment Plan
+                    </h3>
+
+
+                    <div class="mt-5 space-y-4">
+
+
+                        <div
+                            class="flex items-center justify-between"
+                        >
+
+                            <div>
+
+                                <p class="font-semibold">
+                                    Payment 1
+                                </p>
+
+                                <p class="text-xs text-white/50">
+                                    40%
+                                </p>
+
+                            </div>
+
+                            <strong>
+                                €<%= Number(
+                                    pricing.installments.first
+                                ).toFixed(2) %>
+                            </strong>
+
+                        </div>
+
+
+                        <div
+                            class="border-t border-white/10"
+                        ></div>
+
+
+                        <div
+                            class="flex items-center justify-between"
+                        >
+
+                            <div>
+
+                                <p class="font-semibold">
+                                    Payment 2
+                                </p>
+
+                                <p class="text-xs text-white/50">
+                                    30%
+                                </p>
+
+                            </div>
+
+                            <strong>
+                                €<%= Number(
+                                    pricing.installments.second
+                                ).toFixed(2) %>
+                            </strong>
+
+                        </div>
+
+
+                        <div
+                            class="border-t border-white/10"
+                        ></div>
+
+
+                        <div
+                            class="flex items-center justify-between"
+                        >
+
+                            <div>
+
+                                <p class="font-semibold">
+                                    Payment 3
+                                </p>
+
+                                <p class="text-xs text-white/50">
+                                    30%
+                                </p>
+
+                            </div>
+
+                            <strong>
+                                €<%= Number(
+                                    pricing.installments.third
+                                ).toFixed(2) %>
+                            </strong>
+
+                        </div>
+
+
                     </div>
-                    <% } %><a href="/registrations/create"
-                            class="mt-6 block rounded-xl bg-orange px-5 py-3 text-center font-bold">New Registration</a>
-            </aside>
-        </div>
-    </div><%- include('../partials/footer') %>
+
+                </div>
+
+            <% } else { %>
+
+                <div
+                    class="mt-8 rounded-2xl bg-white/10 p-5"
+                >
+
+                    <p class="font-bold">
+                        One Payment
+                    </p>
+
+                    <p class="mt-2 text-sm text-white/60">
+                        The full amount is paid in one payment.
+                    </p>
+
+                </div>
+
+            <% } %>
+
+
+            <a
+                href="/registrations/create"
+                class="mt-7 block rounded-xl bg-orange px-5 py-3 text-center font-bold text-white transition hover:-translate-y-0.5"
+            >
+                Create Another Registration
+            </a>
+
+        </aside>
+
+    </div>
+
+
+    <div
+        class="mt-6 rounded-2xl border border-orange/10 bg-sand/30 p-5"
+    >
+
+        <p class="text-sm text-plum/70">
+
+            Registration ID:
+
+            <strong class="text-plum">
+                #<%= registration.id %>
+            </strong>
+
+        </p>
+
+    </div>
+
+</div>
+
+<%- include("../partials/footer") %>
