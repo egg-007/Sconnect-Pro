@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= typeof title !=='undefined' ? title : 'SportConnect Pro' %>
+  </title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {theme: {extend: {colors: {cream: '#F8F1E5', sand: '#EAD2A3', plum: '#401A4C', orange: '#E66B1F', ink: '#24142B'}, boxShadow: {soft: '0 10px 30px rgba(64,26,76,.08)'}}}}
+  </script>
+</head>
+
+<body class="min-h-screen bg-cream text-ink">
+  <header class="sticky top-0 z-50 border-b border-orange/10 bg-white/95 backdrop-blur">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <a href="/" class="flex items-center gap-3">
+        <div class="grid h-10 w-10 place-items-center rounded-xl bg-orange font-black text-white">SC</div>
+        <div>
+          <p class="text-lg font-black text-plum">SportConnect <span class="text-orange">Pro</span></p>
+          <p class="text-xs text-plum/45">Stronger Communities Through Sport</p>
+        </div>
+      </a>
+      <nav class="hidden gap-7 text-sm font-semibold text-plum md:flex">
+        <a href="/" class="hover:text-orange">Home</a><a href="/facilities" class="hover:text-orange">Facilities</a><a
+          href="/associations" class="hover:text-orange">Associations</a><a href="/activities"
+          class="hover:text-orange">Activities</a><a href="/members" class="hover:text-orange">Members</a><a
+          href="/registrations/create" class="hover:text-orange">Register</a>
+      </nav>
+      <a href="/registrations/create" class="rounded-xl bg-orange px-5 py-3 text-sm font-bold text-white">Get
+        Started</a>
+    </div>
+  </header>
+  <main class="mx-auto max-w-7xl px-6 py-8">

@@ -1,126 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Create Member</title>
-
-    <link
-        rel="stylesheet"
-        href="/css/style.css"
-    >
-</head>
-
-<body>
-
-    <h1>Create Member</h1>
-
-    <form
-        action="/members"
-        method="POST"
-    >
-
-        <div>
-            <label>Family</label>
-
-            <select
-                name="family_id"
-                required
-            >
-
-                <% families.forEach(family => { %>
-
-                    <option value="<%= family.id %>">
-                        <%= family.name %>
-                    </option>
-
-                <% }) %>
-
-            </select>
-        </div>
-
-        <div>
-            <label>First Name</label>
-
-            <input
-                type="text"
-                name="first_name"
-                required
-            >
-        </div>
-
-        <div>
-            <label>Last Name</label>
-
-            <input
-                type="text"
-                name="last_name"
-                required
-            >
-        </div>
-
-        <div>
-            <label>Birth Date</label>
-
-            <input
-                type="date"
-                name="birth_date"
-                required
-            >
-        </div>
-
-        <div>
-            <label>Email</label>
-
-            <input
-                type="email"
-                name="email"
-            >
-        </div>
-
-        <div>
-            <label>Phone</label>
-
-            <input
-                type="text"
-                name="phone"
-            >
-        </div>
-
-        <div>
-            <label>Medical Certificate Date</label>
-
-            <input
-                type="date"
-                name="medical_certificate_date"
-            >
-        </div>
-
-        <div>
-            <label>Pass'Sport Code</label>
-
-            <input
-                type="text"
-                name="pass_sport_code"
-            >
-        </div>
-
-        <button type="submit">
-            Create Member
-        </button>
-
-    </form>
-
-    <a href="/members">
-        Back
-    </a>
-
-</body>
-
-</html>
+<%- include('../partials/header', { title: 'Create Member' }) %>
+    <div class="mx-auto max-w-3xl">
+        <h1 class="mb-8 text-4xl font-black text-plum">Create Member</h1>
+        <form action="/members" method="POST" class="grid gap-5 rounded-2xl bg-white p-7 shadow-soft md:grid-cols-2">
+            <div class="md:col-span-2"><label class="mb-2 block text-sm font-bold text-plum">Family</label><select
+                    name="family_id" required class="w-full rounded-xl border border-plum/10 px-4 py-3">
+                    <% families.forEach(f=> { %><option value="<%= f.id %>">
+                            <%= f.name %>
+                        </option>
+                        <% }) %>
+                </select></div>
+            <div><label class="mb-2 block text-sm font-bold text-plum">First Name</label><input name="first_name"
+                    required class="w-full rounded-xl border border-plum/10 px-4 py-3"></div>
+            <div><label class="mb-2 block text-sm font-bold text-plum">Last Name</label><input name="last_name" required
+                    class="w-full rounded-xl border border-plum/10 px-4 py-3"></div>
+            <div><label class="mb-2 block text-sm font-bold text-plum">Birth Date</label><input type="date"
+                    name="birth_date" required class="w-full rounded-xl border border-plum/10 px-4 py-3"></div>
+            <div><label class="mb-2 block text-sm font-bold text-plum">Email</label><input type="email" name="email"
+                    class="w-full rounded-xl border border-plum/10 px-4 py-3"></div>
+            <div><label class="mb-2 block text-sm font-bold text-plum">Phone</label><input name="phone"
+                    class="w-full rounded-xl border border-plum/10 px-4 py-3"></div>
+            <div><label class="mb-2 block text-sm font-bold text-plum">Medical Certificate Date</label><input
+                    type="date" name="medical_certificate_date"
+                    class="w-full rounded-xl border border-plum/10 px-4 py-3"></div>
+            <div class="md:col-span-2"><label class="mb-2 block text-sm font-bold text-plum">Pass'Sport
+                    Code</label><input name="pass_sport_code" class="w-full rounded-xl border border-plum/10 px-4 py-3">
+            </div>
+            <div class="md:col-span-2 flex gap-3"><button
+                    class="rounded-xl bg-orange px-5 py-3 font-bold text-white">Create Member</button><a href="/members"
+                    class="rounded-xl border border-plum/10 px-5 py-3 font-bold text-plum">Cancel</a></div>
+        </form>
+    </div><%- include('../partials/footer') %>

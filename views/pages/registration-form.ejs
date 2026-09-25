@@ -1,107 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Create Registration</title>
-
-    <link
-        rel="stylesheet"
-        href="/css/style.css"
-    >
-</head>
-
-<body>
-
-    <h1>Create Registration</h1>
-
-    <form
-        action="/registrations"
-        method="POST"
-    >
-
-        <div>
-            <label>Member</label>
-
-            <select
-                name="member_id"
-                required
-            >
-
-                <% members.forEach(member => { %>
-
-                    <option value="<%= member.id %>">
-                        <%= member.first_name %>
-                        <%= member.last_name %>
-                    </option>
-
-                <% }) %>
-
-            </select>
+<%- include('../partials/header', { title: 'New Registration' }) %>
+    <div class="mx-auto max-w-4xl">
+        <div class="mb-8">
+            <p class="text-sm font-bold uppercase tracking-widest text-orange">Registration</p>
+            <h1 class="text-4xl font-black text-plum">New Registration</h1>
+            <p class="mt-2 text-plum/60">Choose a member, activity and payment plan.</p>
         </div>
-
-        <div>
-            <label>Activity</label>
-
-            <select
-                name="activity_id"
-                required
-            >
-
-                <% activities.forEach(activity => { %>
-
-                    <option value="<%= activity.id %>">
-                        <%= activity.name %>
-                        -
-                        <%= activity.age_category || "All" %>
-                    </option>
-
-                <% }) %>
-
-            </select>
-        </div>
-
-        <div>
-            <label>Temporary Final Price</label>
-
-            <input
-                type="number"
-                name="final_price"
-                min="15"
-                step="0.01"
-                value="100"
-                required
-            >
-        </div>
-
-        <div>
-            <label>Payment Plan</label>
-
-            <select name="payment_plan">
-
-                <option value="1">
-                    One payment
-                </option>
-
-                <option value="3">
-                    Three payments
-                </option>
-
-            </select>
-        </div>
-
-        <button type="submit">
-            Register
-        </button>
-
-    </form>
-
-</body>
-
-</html>
+        <form action="/registrations" method="POST"
+            class="grid gap-5 rounded-2xl bg-white p-7 shadow-soft md:grid-cols-2">
+            <div><label class="mb-2 block text-sm font-bold text-plum">Member</label><select name="member_id" required
+                    class="w-full rounded-xl border border-plum/10 px-4 py-3">
+                    <% members.forEach(member=> { %><option value="<%= member.id %>">
+                            <%= member.first_name %>
+                                <%= member.last_name %>
+                        </option>
+                        <% }) %>
+                </select></div>
+            <div><label class="mb-2 block text-sm font-bold text-plum">Activity</label><select name="activity_id"
+                    required class="w-full rounded-xl border border-plum/10 px-4 py-3">
+                    <% activities.forEach(activity=> { %><option value="<%= activity.id %>">
+                            <%= activity.name %> · €<%= activity.base_price %>
+                        </option>
+                        <% }) %>
+                </select></div>
+            <div class="md:col-span-2"><label class="mb-2 block text-sm font-bold text-plum">Payment Plan</label><select
+                    name="payment_plan" class="w-full rounded-xl border border-plum/10 px-4 py-3">
+                    <option value="1">One payment</option>
+                    <option value="3">Three payments (40% / 30% / 30%)</option>
+                </select></div>
+            <div class="md:col-span-2 rounded-xl bg-sand/25 p-4 text-sm text-plum/70">Final price is calculated
+                automatically from residency, family discount, family quotient and Pass'Sport.</div>
+            <div class="md:col-span-2"><button
+                    class="w-full rounded-xl bg-orange px-5 py-3 font-bold text-white">Calculate & Register</button>
+            </div>
+        </form>
+    </div><%- include('../partials/footer') %>

@@ -1,0 +1,30 @@
+<%- include('../partials/header', { title: 'Dashboard' }) %>
+    <div class="mb-8">
+        <p class="text-sm font-bold uppercase tracking-widest text-orange">Overview</p>
+        <h1 class="text-4xl font-black text-plum">Dashboard</h1>
+    </div>
+    <div class="grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl bg-white p-6 shadow-soft">
+            <p class="text-sm text-plum/50">Facilities</p>
+            <p class="mt-2 text-4xl font-black text-plum">
+                <%= typeof stats !=='undefined' ? stats.facilities : '—' %>
+            </p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 shadow-soft">
+            <p class="text-sm text-plum/50">Activities</p>
+            <p class="mt-2 text-4xl font-black text-plum">
+                <%= typeof stats !=='undefined' ? stats.activities : '—' %>
+            </p>
+        </div>
+        <div class="rounded-2xl bg-white p-6 shadow-soft">
+            <p class="text-sm text-plum/50">Members</p>
+            <p class="mt-2 text-4xl font-black text-plum">
+                <%= typeof stats !=='undefined' ? stats.members : '—' %>
+            </p>
+        </div>
+    </div>
+    <div class="mt-6 rounded-2xl bg-plum p-7 text-white shadow-soft">
+        <h2 class="text-2xl font-black">Operations at a glance</h2>
+        <p class="mt-2 text-white/60">Manage facilities, associations, activities, members and registrations from the
+            top navigation.</p>
+    </div><%- include('../partials/footer') %>

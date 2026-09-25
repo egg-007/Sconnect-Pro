@@ -1,75 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Create Association</title>
-
-    <link
-        rel="stylesheet"
-        href="/css/style.css"
-    >
-</head>
-
-<body>
-
-    <h1>Create Association</h1>
-
-    <form
-        action="/associations"
-        method="POST"
-    >
-
-        <div>
-
-            <label>Name</label>
-
-            <input
-                type="text"
-                name="name"
-                required
-            >
-
-        </div>
-
-        <div>
-
-            <label>Email</label>
-
-            <input
-                type="email"
-                name="email"
-            >
-
-        </div>
-
-        <div>
-
-            <label>Phone</label>
-
-            <input
-                type="text"
-                name="phone"
-            >
-
-        </div>
-
-        <button type="submit">
-            Create Association
-        </button>
-
-    </form>
-
-    <a href="/associations">
-        Back
-    </a>
-
-</body>
-
-</html>
+<%- include('../partials/header', { title: 'Create Association' }) %>
+    <div class="mx-auto max-w-2xl">
+        <h1 class="mb-8 text-4xl font-black text-plum">Create Association</h1>
+        <form action="/associations" method="POST" class="space-y-5 rounded-2xl bg-white p-7 shadow-soft">
+            <div><label class="mb-2 block text-sm font-bold text-plum">Name</label><input name="name" required
+                    class="w-full rounded-xl border border-plum/10 px-4 py-3"></div>
+            <div><label class="mb-2 block text-sm font-bold text-plum">Email</label><input type="email" name="email"
+                    class="w-full rounded-xl border border-plum/10 px-4 py-3"></div>
+            <div><label class="mb-2 block text-sm font-bold text-plum">Phone</label><input name="phone"
+                    class="w-full rounded-xl border border-plum/10 px-4 py-3"></div>
+            <div class="flex gap-3"><button class="rounded-xl bg-orange px-5 py-3 font-bold text-white">Create
+                    Association</button><a href="/associations"
+                    class="rounded-xl border border-plum/10 px-5 py-3 font-bold text-plum">Cancel</a></div>
+        </form>
+    </div><%- include('../partials/footer') %>

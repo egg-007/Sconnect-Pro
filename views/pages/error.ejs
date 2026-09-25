@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Error <%= statusCode %></title>
-
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body>
-
-    <h1>Error <%= statusCode %></h1>
-
-    <p><%= message %></p>
-
-    <a href="/">Back to home</a>
-
-</body>
-</html>
+<%- include('../partials/header', { title: 'Error' }) %>
+    <div class="mx-auto max-w-xl py-16 text-center">
+        <div
+            class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-orange/10 text-3xl font-black text-orange">
+            !</div>
+        <p class="mt-6 text-sm font-bold uppercase tracking-widest text-orange">Error <%= statusCode %>
+        </p>
+        <h1 class="mt-2 text-4xl font-black text-plum">
+            <%= message %>
+        </h1><a href="/" class="mt-8 inline-block rounded-xl bg-orange px-5 py-3 font-bold text-white">Back Home</a>
+    </div><%- include('../partials/footer') %>

@@ -1,85 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Members - SportConnect Pro</title>
-
-    <link
-        rel="stylesheet"
-        href="/css/style.css"
-    >
-</head>
-
-<body>
-
-    <h1>Members</h1>
-
-    <a href="/members/create">
-        Create Member
-    </a>
-
-    <% if (members.length === 0) { %>
-
-        <p>No members found.</p>
-
-    <% } else { %>
-
-        <table border="1">
-
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Family</th>
-                    <th>Birth Date</th>
-                    <th>Email</th>
-                    <th>Medical Status</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <% members.forEach(member => { %>
-
+<%- include('../partials/header', { title: 'Members' }) %>
+    <div class="mb-8 flex items-end justify-between">
+        <div>
+            <p class="text-sm font-bold uppercase tracking-widest text-orange">Community</p>
+            <h1 class="text-4xl font-black text-plum">Members</h1>
+        </div><a href="/members/create" class="rounded-xl bg-orange px-5 py-3 font-bold text-white">+ Create Member</a>
+    </div>
+    <div class="overflow-hidden rounded-2xl bg-white shadow-soft">
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+                <thead class="bg-plum text-left text-white">
                     <tr>
-                        <td><%= member.id %></td>
-
-                        <td>
-                            <%= member.first_name %>
-                            <%= member.last_name %>
-                        </td>
-
-                        <td>
-                            <%= member.family_name %>
-                        </td>
-
-                        <td>
-                            <%= member.birth_date %>
-                        </td>
-
-                        <td>
-                            <%= member.email || "-" %>
-                        </td>
-
-                        <td>
-                            <%= member.medical_status %>
-                        </td>
+                        <th class="px-5 py-4">Member</th>
+                        <th class="px-5 py-4">Family</th>
+                        <th class="px-5 py-4">Birth date</th>
+                        <th class="px-5 py-4">Email</th>
+                        <th class="px-5 py-4">Medical</th>
                     </tr>
-
-                <% }) %>
-
-            </tbody>
-
-        </table>
-
-    <% } %>
-
-</body>
-
-</html>
+                </thead>
+                <tbody class="divide-y divide-plum/5">
+                    <% members.forEach(member=> { %><tr class="hover:bg-sand/20">
+                            <td class="px-5 py-4 font-bold text-plum">
+                                <%= member.first_name %>
+                                    <%= member.last_name %>
+                            </td>
+                            <td class="px-5 py-4">
+                                <%= member.family_name %>
+                            </td>
+                            <td class="px-5 py-4">
+                                <%= member.birth_date %>
+                            </td>
+                            <td class="px-5 py-4">
+                                <%= member.email || '-' %>
+                            </td>
+                            <td class="px-5 py-4"><span
+                                    class="rounded-full px-3 py-1 text-xs font-bold <%= member.medical_status === 'compliant' ? 'bg-green-100 text-green-700' : 'bg-orange/10 text-orange' %>">
+                                    <%= member.medical_status %>
+                                </span></td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div><%- include('../partials/footer') %>

@@ -3,7 +3,7 @@ function calculatePrice({
     isResident,
     familyRegistrationCount,
     familyQuotient,
-    hasPassSport
+    hasPassSport,
 }) {
     let price = Number(basePrice);
 
@@ -16,16 +16,13 @@ function calculatePrice({
     }
 
     if (familyRegistrationCount >= 2) {
-        price *= 0.70;
+        price *= 0.7;
     }
 
     if (familyQuotient < 600) {
-        price *= 0.60;
-    } else if (
-        familyQuotient >= 600 &&
-        familyQuotient <= 900
-    ) {
-        price *= 0.80;
+        price *= 0.6;
+    } else if (familyQuotient >= 600 && familyQuotient <= 900) {
+        price *= 0.8;
     }
 
     if (hasPassSport) {
@@ -42,26 +39,20 @@ function calculatePrice({
 function calculateInstallments(total) {
     total = Number(total);
 
-    const second = Number(
-        (total * 0.30).toFixed(2)
-    );
+    const second = Number((total * 0.3).toFixed(2));
 
-    const third = Number(
-        (total * 0.30).toFixed(2)
-    );
+    const third = Number((total * 0.3).toFixed(2));
 
-    const first = Number(
-        (total - second - third).toFixed(2)
-    );
+    const first = Number((total - second - third).toFixed(2));
 
     return {
         first,
         second,
-        third
+        third,
     };
 }
 
 module.exports = {
     calculatePrice,
-    calculateInstallments
+    calculateInstallments,
 };

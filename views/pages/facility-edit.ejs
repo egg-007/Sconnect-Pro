@@ -1,93 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Edit Facility - SportConnect Pro</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body>
-
-    <h1>Edit Facility</h1>
-
-    <form
-        action="/facilities/<%= facility.id %>/update"
-        method="POST"
-    >
-
-        <div>
-            <label>Name</label>
-
-            <input
-                type="text"
-                name="name"
-                value="<%= facility.name %>"
-                required
-            >
-        </div>
-
-        <div>
-            <label>Type</label>
-
-            <input
-                type="text"
-                name="type"
-                value="<%= facility.type %>"
-                required
-            >
-        </div>
-
-        <div>
-            <label>Address</label>
-
-            <input
-                type="text"
-                name="address"
-                value="<%= facility.address || '' %>"
-            >
-        </div>
-
-        <div>
-            <label>ERP Capacity</label>
-
-            <input
-                type="number"
-                name="erp_capacity"
-                min="1"
-                value="<%= facility.erp_capacity %>"
-                required
-            >
-        </div>
-
-        <div>
-            <label>
-
-                <input
-                    type="checkbox"
-                    name="is_divisible"
-                    value="true"
-                    <%= facility.is_divisible ? "checked" : "" %>
-                >
-
-                Divisible
-
-            </label>
-        </div>
-
-        <button type="submit">
-            Update Facility
-        </button>
-
-    </form>
-
-    <a href="/facilities">
-        Back
-    </a>
-
-</body>
-
-</html>
+<%- include('../partials/header', { title: 'Edit Facility' }) %>
+    <div class="mx-auto max-w-2xl">
+        <h1 class="mb-8 text-4xl font-black text-plum">Edit Facility</h1>
+        <form action="/facilities/<%= facility.id %>/update" method="POST"
+            class="space-y-5 rounded-2xl bg-white p-7 shadow-soft">
+            <div><label class="mb-2 block text-sm font-bold text-plum">Name</label><input name="name"
+                    value="<%= facility.name %>" required class="w-full rounded-xl border border-plum/10 px-4 py-3">
+            </div>
+            <div class="grid gap-5 md:grid-cols-2">
+                <div><label class="mb-2 block text-sm font-bold text-plum">Type</label><input name="type"
+                        value="<%= facility.type %>" required class="w-full rounded-xl border border-plum/10 px-4 py-3">
+                </div>
+                <div><label class="mb-2 block text-sm font-bold text-plum">ERP Capacity</label><input type="number"
+                        min="1" name="erp_capacity" value="<%= facility.erp_capacity %>" required
+                        class="w-full rounded-xl border border-plum/10 px-4 py-3"></div>
+            </div>
+            <div><label class="mb-2 block text-sm font-bold text-plum">Address</label><input name="address"
+                    value="<%= facility.address || '' %>" class="w-full rounded-xl border border-plum/10 px-4 py-3">
+            </div><label class="flex items-center gap-3 rounded-xl bg-sand/25 p-4"><input type="checkbox"
+                    name="is_divisible" value="true" <%=facility.is_divisible ? 'checked' : '' %>
+                class="accent-orange"><span class="font-semibold text-plum">Divisible into sub-zones</span></label>
+            <div class="flex gap-3"><button class="rounded-xl bg-orange px-5 py-3 font-bold text-white">Save
+                    Changes</button><a href="/facilities"
+                    class="rounded-xl border border-plum/10 px-5 py-3 font-bold text-plum">Cancel</a></div>
+        </form>
+    </div><%- include('../partials/footer') %>

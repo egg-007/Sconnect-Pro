@@ -1,0 +1,36 @@
+<%- include('../partials/header', { title: activity.name }) %>
+    <div class="grid gap-6 lg:grid-cols-[1fr_.7fr]">
+        <section class="rounded-2xl bg-white p-7 shadow-soft">
+            <p class="text-sm font-bold uppercase tracking-widest text-orange">Activity</p>
+            <h1 class="mt-2 text-4xl font-black text-plum">
+                <%= activity.name %>
+            </h1>
+            <div class="mt-6 grid gap-4 sm:grid-cols-2 text-sm">
+                <div class="rounded-xl bg-sand/20 p-4"><span class="text-plum/50">Season</span>
+                    <p class="font-bold text-plum">
+                        <%= activity.season %>
+                    </p>
+                </div>
+                <div class="rounded-xl bg-sand/20 p-4"><span class="text-plum/50">Schedule</span>
+                    <p class="font-bold text-plum">
+                        <%= activity.day_of_week %>, <%= activity.start_time %>–<%= activity.end_time %>
+                    </p>
+                </div>
+                <div class="rounded-xl bg-sand/20 p-4"><span class="text-plum/50">Capacity</span>
+                    <p class="font-bold text-plum">
+                        <%= activity.max_capacity %>
+                    </p>
+                </div>
+                <div class="rounded-xl bg-sand/20 p-4"><span class="text-plum/50">Base price</span>
+                    <p class="font-bold text-plum">€<%= activity.base_price %>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <aside class="rounded-2xl bg-plum p-7 text-white shadow-soft">
+            <h2 class="text-2xl font-black">Registration</h2>
+            <p class="mt-2 text-white/60">Check eligibility, pricing and availability before confirming.</p><a
+                href="/registrations/create"
+                class="mt-6 block rounded-xl bg-orange px-5 py-3 text-center font-bold">Register Member</a>
+        </aside>
+    </div><%- include('../partials/footer') %>

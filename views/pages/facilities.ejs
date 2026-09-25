@@ -1,101 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Facilities - SportConnect Pro</title>
-
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-
-<body>
-
-    <h1>Facilities</h1>
-
-    <a href="/facilities/create">
-        Create Facility
-    </a>
-
-    <% if (facilities.length === 0) { %>
-
-        <p>No facilities found.</p>
-
-    <% } else { %>
-
-        <table border="1">
-
-            <thead>
-
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Address</th>
-                    <th>ERP Capacity</th>
-                    <th>Divisible</th>
-                    <th>Actions</th>
-                </tr>
-
-            </thead>
-
-            <tbody>
-
-                <% facilities.forEach(facility => { %>
-
+<%- include('../partials/header', { title: 'Facilities' }) %>
+    <div class="mb-8 flex items-end justify-between">
+        <div>
+            <p class="text-sm font-bold uppercase tracking-widest text-orange">Infrastructure</p>
+            <h1 class="text-4xl font-black text-plum">Facilities</h1>
+        </div><a href="/facilities/create" class="rounded-xl bg-orange px-5 py-3 font-bold text-white">+ Create
+            Facility</a>
+    </div>
+    <div class="overflow-hidden rounded-2xl bg-white shadow-soft">
+        <div class="overflow-x-auto">
+            <table class="min-w-full text-sm">
+                <thead class="bg-plum text-left text-white">
                     <tr>
-
-                        <td><%= facility.id %></td>
-
-                        <td>
-                            <%= facility.name %>
-                        </td>
-
-                        <td>
-                            <%= facility.type %>
-                        </td>
-
-                        <td>
-                            <%= facility.address || "-" %>
-                        </td>
-
-                        <td>
-                            <%= facility.erp_capacity %>
-                        </td>
-
-                        <td>
-                            <%= facility.is_divisible ? "Yes" : "No" %>
-                        </td>
-
-                        <td>
-
-                            <a href="/facilities/<%= facility.id %>/edit">
-                                Edit
-                            </a>
-
-                            <form
-                                action="/facilities/<%= facility.id %>/delete"
-                                method="POST"
-                                style="display:inline"
-                            >
-                                <button type="submit">
-                                    Delete
-                                </button>
-                            </form>
-
-                        </td>
-
+                        <th class="px-5 py-4">Name</th>
+                        <th class="px-5 py-4">Type</th>
+                        <th class="px-5 py-4">Address</th>
+                        <th class="px-5 py-4">ERP</th>
+                        <th class="px-5 py-4">Divisible</th>
+                        <th class="px-5 py-4 text-right">Actions</th>
                     </tr>
-
-                <% }) %>
-
-            </tbody>
-
-        </table>
-
-    <% } %>
-
-</body>
-
-</html>
+                </thead>
+                <tbody class="divide-y divide-plum/5">
+                    <% facilities.forEach(facility=> { %><tr class="hover:bg-sand/20">
+                            <td class="px-5 py-4 font-bold text-plum">
+                                <%= facility.name %>
+                            </td>
+                            <td class="px-5 py-4">
+                                <%= facility.type %>
+                            </td>
+                            <td class="px-5 py-4">
+                                <%= facility.address || '-' %>
+                            </td>
+                            <td class="px-5 py-4">
+                                <%= facility.erp_capacity %>
+                            </td>
+                            <td class="px-5 py-4">
+                                <%= facility.is_divisible ? 'Yes' : 'No' %>
+                            </td>
+                            <td class="px-5 py-4">
+                                <div class="flex justify-end gap-2"><a href="/facilities/<%= facility.id %>/edit"
+                                        class="rounded-lg bg-sand/60 px-3 py-2 font-semibold text-plum">Edit</a>
+                                    <form action="/facilities/<%= facility.id %>/delete" method="POST"><button
+                                            class="rounded-lg bg-orange/10 px-3 py-2 font-semibold text-orange">Delete</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <%- include('../partials/footer') %>

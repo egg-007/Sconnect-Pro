@@ -1,92 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Registration Result</title>
-
-    <link
-        rel="stylesheet"
-        href="/css/style.css"
-    >
-</head>
-
-<body>
-
-    <h1>Registration Confirmed</h1>
-
-    <h2>Pricing Details</h2>
-
-    <p>
-        Base Price:
-        €<%= pricing.base_price %>
-    </p>
-
-    <p>
-        Resident:
-        <%= pricing.is_resident ? "Yes" : "No" %>
-    </p>
-
-    <p>
-        Previous Family Registrations:
-        <%= pricing.family_registration_count %>
-    </p>
-
-    <p>
-        Family Quotient:
-        <%= pricing.family_quotient %>
-    </p>
-
-    <p>
-        Pass'Sport:
-        <%= pricing.has_pass_sport ? "Yes" : "No" %>
-    </p>
-
-    <hr>
-
-    <h2>
-        Final Price:
-        €<%= pricing.final_price %>
-    </h2>
-
-    <% if (pricing.installments) { %>
-
-        <h3>3 Payment Plan</h3>
-
-        <p>
-            Payment 1:
-            €<%= pricing.installments.first %>
-        </p>
-
-        <p>
-            Payment 2:
-            €<%= pricing.installments.second %>
-        </p>
-
-        <p>
-            Payment 3:
-            €<%= pricing.installments.third %>
-        </p>
-
-    <% } %>
-
-    <p>
-        Registration Status:
-        <strong>
-            <%= registration.status %>
-        </strong>
-    </p>
-
-    <a href="/registrations/create">
-        New Registration
-    </a>
-
-</body>
-
-</html>
+<%- include('../partials/header', { title: 'Checkout' }) %>
+    <div class="mx-auto max-w-4xl">
+        <div class="grid gap-6 lg:grid-cols-[1.2fr_.8fr]">
+            <section class="rounded-2xl bg-white p-7 shadow-soft">
+                <p class="text-sm font-bold uppercase tracking-widest text-orange">Pricing</p>
+                <h1 class="mt-2 text-4xl font-black text-plum">Registration Summary</h1>
+                <div class="mt-7 space-y-4 text-sm">
+                    <div class="flex justify-between border-b border-plum/5 pb-3"><span>Base price</span><strong>€<%=
+                                pricing.base_price %></strong></div>
+                    <div class="flex justify-between border-b border-plum/5 pb-3"><span>Resident</span><strong>
+                            <%= pricing.is_resident ? 'Yes' : 'No' %>
+                        </strong></div>
+                    <div class="flex justify-between border-b border-plum/5 pb-3"><span>Previous family
+                            registrations</span><strong>
+                            <%= pricing.family_registration_count %>
+                        </strong></div>
+                    <div class="flex justify-between border-b border-plum/5 pb-3"><span>Family quotient</span><strong>
+                            <%= pricing.family_quotient %>
+                        </strong></div>
+                    <div class="flex justify-between"><span>Pass'Sport</span><strong>
+                            <%= pricing.has_pass_sport ? 'Applied' : 'No' %>
+                        </strong></div>
+                </div>
+            </section>
+            <aside class="rounded-2xl bg-plum p-7 text-white shadow-soft">
+                <p class="text-sm font-bold uppercase tracking-widest text-sand">Final price</p>
+                <p class="mt-3 text-5xl font-black">€<%= pricing.final_price %>
+                </p>
+                <p class="mt-3 text-white/60">Status: <%= registration.status %>
+                </p>
+                <% if (pricing.installments) { %>
+                    <div class="mt-7 space-y-3 rounded-xl bg-white/10 p-4 text-sm">
+                        <div class="flex justify-between"><span>Payment 1</span><strong>€<%= pricing.installments.first
+                                    %></strong></div>
+                        <div class="flex justify-between"><span>Payment 2</span><strong>€<%= pricing.installments.second
+                                    %></strong></div>
+                        <div class="flex justify-between"><span>Payment 3</span><strong>€<%= pricing.installments.third
+                                    %></strong></div>
+                    </div>
+                    <% } %><a href="/registrations/create"
+                            class="mt-6 block rounded-xl bg-orange px-5 py-3 text-center font-bold">New Registration</a>
+            </aside>
+        </div>
+    </div><%- include('../partials/footer') %>
