@@ -16,6 +16,7 @@ const eligibilityService =
 const pricingService =
     require("./pricingService");
 
+
 async function createRegistration(data) {
 
     const member =
@@ -27,6 +28,7 @@ async function createRegistration(data) {
         throw new Error("Member not found");
     }
 
+
     const activity =
         await activityRepository.findById(
             Number(data.activity_id)
@@ -36,6 +38,7 @@ async function createRegistration(data) {
         throw new Error("Activity not found");
     }
 
+
     const family =
         await familyRepository.findById(
             member.family_id
@@ -44,6 +47,7 @@ async function createRegistration(data) {
     if (!family) {
         throw new Error("Family not found");
     }
+
 
     const eligible =
         eligibilityService.isEligibleForActivity({
@@ -55,19 +59,23 @@ async function createRegistration(data) {
                 activity.is_all_public
         });
 
+
     if (!eligible) {
         throw new Error(
-            "Member is not eligible for this activity age category"
+            "Member is not eligible for this activity"
         );
     }
+
 
     const medicalStatus =
         eligibilityService.getMedicalStatus({
             certificateDate:
                 member.medical_certificate_date,
+
             isRiskSport:
                 activity.is_risk_sport
         });
+
 
     const familyRegistrationCount =
         await registrationRepository
@@ -76,8 +84,10 @@ async function createRegistration(data) {
                 activity.season
             );
 
+
     const hasPassSport =
         Boolean(member.pass_sport_code);
+
 
     const finalPrice =
         pricingService.calculatePrice({
@@ -90,13 +100,27 @@ async function createRegistration(data) {
             familyRegistrationCount,
 
             familyQuotient:
-                Number(family.family_quotient),
+                Number(
+                    family.family_quotient
+                ),
 
             hasPassSport
         });
 
+
     const paymentPlan =
         Number(data.payment_plan || 1);
+
+
+    if (
+        paymentPlan !== 1 &&
+        paymentPlan !== 3
+    ) {
+        throw new Error(
+            "Payment plan must be 1 or 3"
+        );
+    }
+
 
     const registration = {
         member_id:
@@ -117,12 +141,15 @@ async function createRegistration(data) {
                 : "medical_non_compliant"
     };
 
+
     const createdRegistration =
         await registrationRepository.create(
             registration
         );
 
+
     let installments = null;
+
 
     if (paymentPlan === 3) {
         installments =
@@ -131,13 +158,16 @@ async function createRegistration(data) {
             );
     }
 
+
     return {
         registration:
             createdRegistration,
 
         pricing: {
             base_price:
-                Number(activity.base_price),
+                Number(
+                    activity.base_price
+                ),
 
             is_resident:
                 family.is_resident,
@@ -146,7 +176,9 @@ async function createRegistration(data) {
                 familyRegistrationCount,
 
             family_quotient:
-                Number(family.family_quotient),
+                Number(
+                    family.family_quotient
+                ),
 
             has_pass_sport:
                 hasPassSport,
@@ -158,6 +190,7 @@ async function createRegistration(data) {
         }
     };
 }
+
 
 module.exports = {
     createRegistration
