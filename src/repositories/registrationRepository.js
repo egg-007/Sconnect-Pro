@@ -25,6 +25,7 @@ async function create(registration) {
     return result.rows[0];
 }
 
+
 async function countFamilyRegistrationsBySeason(
     familyId,
     season
@@ -32,6 +33,7 @@ async function countFamilyRegistrationsBySeason(
     const result = await pool.query(
         `
         SELECT COUNT(*) AS total
+
         FROM registrations r
 
         JOIN members m
@@ -52,6 +54,7 @@ async function countFamilyRegistrationsBySeason(
 
     return Number(result.rows[0].total);
 }
+
 
 module.exports = {
     create,
