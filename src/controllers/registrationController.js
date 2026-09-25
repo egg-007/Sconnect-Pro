@@ -10,13 +10,17 @@ const activityService =
 const render =
     require("../core/renderer");
 
+
 async function createForm(req, res) {
+
     try {
+
         const members =
             await memberService.getAllMembers();
 
         const activities =
             await activityService.getAllActivities();
+
 
         render(
             res,
@@ -28,6 +32,7 @@ async function createForm(req, res) {
         );
 
     } catch (error) {
+
         console.error(error);
 
         render(
@@ -43,11 +48,17 @@ async function createForm(req, res) {
     }
 }
 
+
 async function store(req, res) {
+
     try {
+
         const result =
             await registrationService
-                .createRegistration(req.body);
+                .createRegistration(
+                    req.body
+                );
+
 
         render(
             res,
@@ -56,6 +67,7 @@ async function store(req, res) {
         );
 
     } catch (error) {
+
         console.error(error);
 
         render(
@@ -70,6 +82,7 @@ async function store(req, res) {
         );
     }
 }
+
 
 module.exports = {
     createForm,
